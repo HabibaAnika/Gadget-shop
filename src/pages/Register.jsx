@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import GoogleLogin from "../components/login-registration/GoogleLogin";
@@ -13,7 +13,7 @@ export default function Register() {
     watch,
     formState: { errors },
   } = useForm();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
@@ -28,12 +28,13 @@ export default function Register() {
         axios.post("http://localhost:4000/users", userData).then(res=>{
            if (res.data.insertedId) {
             Swal.fire({
-              position: "top-end",
+              position: "center",
               icon: "success",
-              title: "",
+              title: "Registration done",
               showConfirmButton: false,
               timer: 1500
-            });  
+            }); 
+            navigate("/") 
            }    
         })
       })
