@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import GoogleLogin from "../components/login-registration/GoogleLogin";
@@ -12,7 +12,7 @@ export default function Register() {
     watch,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
@@ -25,7 +25,9 @@ export default function Register() {
 
        CreateUser(data.email, data.password).then(() =>{
         axios.post("http://localhost:4000/users", userData).then(res=>{
-           console.log(res);     
+           if (res.data.insertedId) {
+            
+           }    
         })
       })
       console.log(userData);
@@ -96,7 +98,8 @@ export default function Register() {
                     },
                   })}
                 />
-                {errors.confirmPassword && <p className="text-red-500 text-sm font-light">Password must match</p>}
+                {errors.confirmPassword && <p className="text-red-500 text-sm font-light">{errors.confirmPassword.message}</p>}
+
               </div>
 
               <div className="form-control">
