@@ -6,6 +6,7 @@ import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Dashboard from "../layouts/Dashboard";
 
 export const router = createBrowserRouter([
     {
@@ -38,4 +39,11 @@ export const router = createBrowserRouter([
        }
       ]
     },
+    {
+      path: "/dashboard",
+      element: <Dashboard/>,
+      children: [{
+        
+      }]
+    }
   ]);
