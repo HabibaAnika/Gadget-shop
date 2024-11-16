@@ -3,6 +3,7 @@ import useAuth from "../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import GoogleLogin from "../components/login-registration/GoogleLogin";
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 export default function Register() {
   const { CreateUser } = useAuth();
@@ -26,7 +27,13 @@ export default function Register() {
        CreateUser(data.email, data.password).then(() =>{
         axios.post("http://localhost:4000/users", userData).then(res=>{
            if (res.data.insertedId) {
-            
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "",
+              showConfirmButton: false,
+              timer: 1500
+            });  
            }    
         })
       })
