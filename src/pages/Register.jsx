@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import GoogleLogin from "../components/login-registration/GoogleLogin";
+import axios from "axios";
 
 export default function Register() {
   const { CreateUser } = useAuth();
@@ -22,8 +23,11 @@ export default function Register() {
 
       const userData = {email, role, status, wishlist}
 
-      // await CreateUser(data.email, data.password);
-      navigate("/");
+       CreateUser(data.email, data.password).then(() =>{
+        axios.post("http://localhost:4000/users", userData).then(res=>{
+           console.log(res);     
+        })
+      })
       console.log(userData);
       // Add navigation to another page if needed
     } catch (error) {
